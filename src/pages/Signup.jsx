@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./Signup.css";
+
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 export default function Signup() {
@@ -12,7 +14,6 @@ export default function Signup() {
   const handleSignup = async (e) => {
     e.preventDefault();
 
-    // calling backend /register if your server is running
     const res = await fetch(`${baseUrl}/auth/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -28,30 +29,33 @@ export default function Signup() {
   };
 
   return (
-    <div style={styles.container}>
+    <div className="signup-container">
       <h2>Sign Up</h2>
-      <form onSubmit={handleSignup} style={styles.form}>
-        <input placeholder="Name" onChange={(e) => setName(e.target.value)} />
-        <input placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
-        <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
 
-        <button style={styles.primaryButton}>Create Account</button>
+      <form onSubmit={handleSignup} className="signup-form">
+        <input
+          className="signup-input"
+          placeholder="Name"
+          onChange={(e) => setName(e.target.value)}
+        />
+
+        <input
+          className="signup-input"
+          placeholder="Email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <input
+          className="signup-input"
+          type="password"
+          placeholder="Password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <button className="signup-button">Create Account</button>
       </form>
 
-      <p style={{ color: "red" }}>{message}</p>
+      {message && <p className="signup-error">{message}</p>}
     </div>
   );
 }
-
-const styles = {
-  container: { textAlign: "center", marginTop: "60px" },
-  form: { display: "flex", flexDirection: "column", width: "240px", margin: "0 auto", gap: "10px" },
-  primaryButton: {
-    backgroundColor: "#007bff",
-    border: "none",
-    padding: "10px",
-    color: "white",
-    borderRadius: "6px",
-    cursor: "pointer",
-  },
-};
