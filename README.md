@@ -47,33 +47,33 @@ Build a web application designed for Northeastern University students to create 
 
 ### Join/Leave Functionality
 
-  Join event (if not full)
+  - Join event (if not full)
   
-  Leave event (free up spot)
+  - Leave event (free up spot)
   
-  Real-time participant count updates via polling
+  - Real-time participant count updates via polling
   
-  Visual indicators (badges) for full events
+  - Visual indicators (badges) for full events
   
-  Waitlist feature (future enhancement)
+  - Waitlist feature (future enhancement)
 
 ### Live Updates
 
-  Auto-refresh every 10-15 seconds using polling
+  - Auto-refresh every 10-15 seconds using polling
   
-  Update participant counts
+  - Update participant counts
   
-  Load new comments
+  - Load new comments
   
-  Highlight new content since last refresh
+  - Highlight new content since last refresh
   
-  Visual loading indicators
+  - Visual loading indicators
 
 ### Data Population
 
-  Script to generate 1000+ realistic campus events
+  - Script to generate 1000+ realistic campus events
   
-  Examples:
+  - Examples:
     
     "Pickup basketball at Marino - 5PM today"
     
@@ -84,9 +84,9 @@ Build a web application designed for Northeastern University students to create 
     
   
   
-  Distributed across all categories
+  - Distributed across all categories
   
-  Various dates (past, current, future)
+  - arious dates (past, current, future)
   
 
 
