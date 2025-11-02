@@ -132,27 +132,23 @@ No prohibited libraries: No Axios, Mongoose, or CORS middleware
 #### 2. Version Control
 
   Git
+  - Version: 2.x or higher
   
-    Version: 2.x or higher
-  
-    Required for version control and collaboration
+  - Required for version control and collaboration
 
   GitHub Account
   
-  For repository hosting and project submission
+  - For repository hosting and project submission
 
 #### 3. Database
 
 MongoDB Atlas (Cloud Database)
 
-  Free tier M0 cluster
+  - Free tier M0 cluster
   
-    Sign up: https://www.mongodb.com/cloud/atlas
+  - Sign up: https://www.mongodb.com/cloud/atlas
   
-  No local MongoDB installation required
-
-
-
+  - No local MongoDB installation required
 
 ### Browser Support
 
