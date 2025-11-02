@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -11,8 +12,8 @@ export default function Signup() {
   const handleSignup = async (e) => {
     e.preventDefault();
 
-    // Example: calling backend /register if your server is running
-    const res = await fetch("/register", {
+    // calling backend /register if your server is running
+    const res = await fetch(`${baseUrl}/auth/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, email, password }),
