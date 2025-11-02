@@ -124,9 +124,7 @@ No prohibited libraries: No Axios, Mongoose, or CORS middleware
   Extensions:
   
     ESLint
-    
     Prettier - Code formatter
-    
     ES7+ React/Redux/React-Native snippets
     MongoDB for VS Code
     GitLens
@@ -135,10 +133,10 @@ No prohibited libraries: No Axios, Mongoose, or CORS middleware
 
   Git
   
-  Version: 2.x or higher
-  Required for version control and collaboration
+    Version: 2.x or higher
   
-  
+    Required for version control and collaboration
+
   GitHub Account
   
   For repository hosting and project submission
@@ -149,7 +147,7 @@ MongoDB Atlas (Cloud Database)
 
   Free tier M0 cluster
   
-  Sign up: https://www.mongodb.com/cloud/atlas
+    Sign up: https://www.mongodb.com/cloud/atlas
   
   No local MongoDB installation required
 
