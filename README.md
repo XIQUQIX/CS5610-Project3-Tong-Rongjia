@@ -24,6 +24,8 @@ https://northeastern.instructure.com/courses/226004/assignments/2902288?module_i
 
 ## Project Objective
 
+Build a web application designed for Northeastern University students to create and join spontaneous campus-related events—such as "Run to Costco," "Study in Snell at 7 PM," "Looking for 3 players for badminton," or "Chess night tonight." This platform helps students make new friends, reduce campus isolation, find study partners, and engage in spontaneous social life outside of class.
+
 ## Features
 
 ## Screenshot
