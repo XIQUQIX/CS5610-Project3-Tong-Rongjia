@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./Login.css";
+
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 export default function Login() {
@@ -21,35 +23,34 @@ export default function Login() {
     setMessage(data.message || data.error);
 
     if (!data.error) {
-      localStorage.setItem("token", "dummy-token"); // replace with real JWT
+      // ✅ Store real token later
+      localStorage.setItem("token", data.token);
       navigate("/");
     }
   };
 
   return (
-    <div style={styles.container}>
+    <div className="login-container">
       <h2>Login</h2>
-      <form onSubmit={handleLogin} style={styles.form}>
-        <input placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
-        <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
 
-        <button style={styles.primaryButton}>Login</button>
+      <form onSubmit={handleLogin} className="login-form">
+        <input
+          className="login-input"
+          placeholder="Email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <input
+          className="login-input"
+          type="password"
+          placeholder="Password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <button className="login-button">Login</button>
       </form>
 
-      <p style={{ color: "red" }}>{message}</p>
+      {message && <p className="error-text">{message}</p>}
     </div>
   );
 }
-
-const styles = {
-  container: { textAlign: "center", marginTop: "60px" },
-  form: { display: "flex", flexDirection: "column", width: "240px", margin: "0 auto", gap: "10px" },
-  primaryButton: {
-    backgroundColor: "#28a745",
-    border: "none",
-    padding: "10px",
-    color: "white",
-    borderRadius: "6px",
-    cursor: "pointer",
-  },
-};

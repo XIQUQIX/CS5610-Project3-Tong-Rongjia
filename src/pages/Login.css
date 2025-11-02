@@ -1,0 +1,35 @@
+.login-container {
+  text-align: center;
+  margin-top: 60px;
+  font-family: Arial, sans-serif;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width: 240px;
+  margin: 0 auto;
+  gap: 10px;
+}
+
+.login-input {
+  padding: 10px;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.login-button {
+  background-color: #28a745;
+  border: none;
+  padding: 10px;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.error-text {
+  color: red;
+  margin-top: 10px;
+}
