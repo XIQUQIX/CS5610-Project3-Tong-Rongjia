@@ -2,7 +2,7 @@
 # Huskyhub
 
 ## Author
-Cai Tong
+Tong Cai
 
 Email: cai.to@northeastern.edu
 
