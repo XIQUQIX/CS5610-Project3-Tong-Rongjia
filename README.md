@@ -20,7 +20,7 @@ https://northeastern.instructure.com/courses/226004
 
 [project3]
 
-(https://northeastern.instructure.com/courses/226004/assignments/2902288?module_item_id=12618850)
+https://northeastern.instructure.com/courses/226004/assignments/2902288?module_item_id=12618850
 
 ## Project Objective
 
