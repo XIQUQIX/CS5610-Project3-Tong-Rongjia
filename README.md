@@ -48,17 +48,25 @@ Build a web application designed for Northeastern University students to create 
 ### Join/Leave Functionality
 
   Join event (if not full)
+  
   Leave event (free up spot)
+  
   Real-time participant count updates via polling
+  
   Visual indicators (badges) for full events
+  
   Waitlist feature (future enhancement)
 
 ### Live Updates
 
   Auto-refresh every 10-15 seconds using polling
+  
   Update participant counts
+  
   Load new comments
+  
   Highlight new content since last refresh
+  
   Visual loading indicators
 
 ### Data Population
@@ -66,15 +74,18 @@ Build a web application designed for Northeastern University students to create 
   Script to generate 1000+ realistic campus events
   
   Examples:
+    
+    "Pickup basketball at Marino - 5PM today"
+    
+    "Study for CSYE 6200 midterm - Snell 3rd floor"
+    
+    "Costco run this Saturday - need 3 people"
   
-  "Pickup basketball at Marino - 5PM today"
-  "Study for CSYE 6200 midterm - Snell 3rd floor"
-  "Costco run this Saturday - need 3 people"
-  "Chess club meetup - Curry 3rd floor lounge"
-  "Looking for badminton partner - Carter Playground"
+    
   
   
   Distributed across all categories
+  
   Various dates (past, current, future)
   
 
