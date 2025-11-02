@@ -113,7 +113,48 @@ Authentication: Session-based with NEU email validation
 No prohibited libraries: No Axios, Mongoose, or CORS middleware
 
 ### Development Tools
-### TODO
+
+
+#### 1. Code Editor
+
+  Visual Studio Code (Recommended)
+  
+  Version: Latest stable release
+  
+  Extensions:
+  
+    ESLint
+    
+    Prettier - Code formatter
+    
+    ES7+ React/Redux/React-Native snippets
+    MongoDB for VS Code
+    GitLens
+
+#### 2. Version Control
+
+  Git
+  
+  Version: 2.x or higher
+  Required for version control and collaboration
+  
+  
+  GitHub Account
+  
+  For repository hosting and project submission
+
+#### 3. Database
+
+MongoDB Atlas (Cloud Database)
+
+  Free tier M0 cluster
+  
+  Sign up: https://www.mongodb.com/cloud/atlas
+  
+  No local MongoDB installation required
+
+
+
 
 ### Browser Support
 
