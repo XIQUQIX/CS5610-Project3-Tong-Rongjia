@@ -28,6 +28,20 @@ Build a web application designed for Northeastern University students to create 
 
 ## Features
 
+### NEU-Specific Features
+
+  Default Event Categories:
+
+  - 📚 Study Sessions - Library meetups, study groups, exam prep
+  - 🏃 Sports & Fitness - Pickup games, gym buddies, runs
+  - 🛒 Grocery Runs - Costco trips, Target runs, car sharing
+  - 🍕 Food & Dining - Restaurant trips, cooking together, food tours
+  - 🎮 Gaming & Entertainment - Board games, video games, movie nights
+  - 🎨 Hobbies & Interests - Photography walks, art projects, music
+  - 🗣️ Language Exchange - Practice conversations, cultural exchange
+  - 🚀 Other - Anything else!
+
+
 ## Screenshot
 ### Sign Up
 
@@ -38,7 +52,17 @@ Build a web application designed for Northeastern University students to create 
 ## Technology Requirements
 
 ### Core Technologies
-### TODO
+Frontend: React.js with Hooks, CSS3
+
+Backend: Node.js + Express (ES Modules only)
+
+Database: MongoDB (No Mongoose - native MongoDB driver)
+
+Deployment: AWS EC2 / Heroku / Render
+
+Authentication: Session-based with NEU email validation
+
+No prohibited libraries: No Axios, Mongoose, or CORS middleware
 
 ### Development Tools
 ### TODO
