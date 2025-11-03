@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Home.css';
+import './Homepage.css';
 
 function Home() {
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ function Home() {
       setLoading(true);
       
       // Fetch current user info
-      const userResponse = await fetch('http://localhost:3000/api/auth/me', {
+      const userResponse = await fetch('http://localhost:4000/api/auth/me', {
         credentials: 'include'
       });
       
