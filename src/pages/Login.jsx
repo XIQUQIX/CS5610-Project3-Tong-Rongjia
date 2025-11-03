@@ -25,7 +25,7 @@ export default function Login() {
     if (!data.error) {
       // ✅ Store real token later
       localStorage.setItem("token", data.token);
-      navigate("/");
+      navigate("/events");
     }
   };
 
