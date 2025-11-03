@@ -20,7 +20,7 @@ function EventList() {
     try {
       setLoading(true);
       setError(null);
-      const response = await fetch('http://localhost:3000/api/events'); // 后端 URL
+      const response = await fetch('http://localhost:4000/api/events'); // 后端 URL
       
       if (!response.ok) {
         throw new Error('Failed to fetch events');
