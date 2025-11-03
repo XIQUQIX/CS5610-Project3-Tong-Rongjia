@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import './EventList.css';
 
 function EventList() {
@@ -286,200 +287,207 @@ function EventList() {
     );
   }
 
-  return (
-    <div className="event-list-container">
-      {/* Header */}
-      <div className="event-list-header">
+return (
+  <div className="event-list-container">
+    {/* Fixed Home 按钮：放到整个页面右上角 */}
+    <Link to="/homepage" className="fixed-home-btn">
+      Home
+    </Link>
+
+    {/* Header - 完整闭合 */}
+    <div className="event-list-header">
+      <div className="header-left">
         <h1>Campus Events</h1>
         <p>Discover and join spontaneous activities around NEU campus</p>
       </div>
+    </div>
 
-      {/* Search and Filters */}
-      <div className="filters-section">
-        {/* Search Bar */}
-        <div className="search-bar">
-          <input
-            type="text"
-            placeholder="Search events by title or description..."
-            value={searchKeyword}
-            onChange={(e) => setSearchKeyword(e.target.value)}
-            className="search-input"
-          />
-          <span className="search-icon">🔍</span>
+    {/* Search and Filters */}
+    <div className="filters-section">
+      {/* Search Bar */}
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Search events by title or description..."
+          value={searchKeyword}
+          onChange={(e) => setSearchKeyword(e.target.value)}
+          className="search-input"
+        />
+        <span className="search-icon">🔍</span>
+      </div>
+
+      {/* Filter Controls */}
+      <div className="filter-controls">
+        <div className="filter-group">
+          <label htmlFor="category-filter">Category:</label>
+          <select
+            id="category-filter"
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+            className="filter-select"
+          >
+            {categories.map(cat => (
+              <option key={cat} value={cat}>
+                {cat === 'all' ? 'All Categories' : cat.charAt(0).toUpperCase() + cat.slice(1)}
+              </option>
+            ))}
+          </select>
         </div>
 
-        {/* Filter Controls */}
-        <div className="filter-controls">
-          <div className="filter-group">
-            <label htmlFor="category-filter">Category:</label>
-            <select
-              id="category-filter"
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              className="filter-select"
-            >
-              {categories.map(cat => (
-                <option key={cat} value={cat}>
-                  {cat === 'all' ? 'All Categories' : cat.charAt(0).toUpperCase() + cat.slice(1)}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="filter-group">
-            <label htmlFor="location-filter">Location:</label>
-            <select
-              id="location-filter"
-              value={selectedLocation}
-              onChange={(e) => setSelectedLocation(e.target.value)}
-              className="filter-select"
-            >
-              {locations.map(loc => (
-                <option key={loc} value={loc}>
-                  {loc === 'all' ? 'All Locations' : loc}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="filter-group">
-            <label htmlFor="date-filter">Date:</label>
-            <select
-              id="date-filter"
-              value={dateFilter}
-              onChange={(e) => setDateFilter(e.target.value)}
-              className="filter-select"
-            >
-              <option value="all">All Dates</option>
-              <option value="today">Today</option>
-              <option value="week">This Week</option>
-              <option value="upcoming">Upcoming</option>
-            </select>
-          </div>
-
-          <div className="filter-group">
-            <label htmlFor="sort-select">Sort by:</label>
-            <select
-              id="sort-select"
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-              className="filter-select"
-            >
-              <option value="date">Date (Earliest First)</option>
-              <option value="popularity">Popularity</option>
-              <option value="newest">Newest First</option>
-            </select>
-          </div>
+        <div className="filter-group">
+          <label htmlFor="location-filter">Location:</label>
+          <select
+            id="location-filter"
+            value={selectedLocation}
+            onChange={(e) => setSelectedLocation(e.target.value)}
+            className="filter-select"
+          >
+            {locations.map(loc => (
+              <option key={loc} value={loc}>
+                {loc === 'all' ? 'All Locations' : loc}
+              </option>
+            ))}
+          </select>
         </div>
 
-        {/* Results Count */}
-        <div className="results-info">
-          <p>Showing {displayedEvents.length} of {totalEvents} events</p>
+        <div className="filter-group">
+          <label htmlFor="date-filter">Date:</label>
+          <select
+            id="date-filter"
+            value={dateFilter}
+            onChange={(e) => setDateFilter(e.target.value)}
+            className="filter-select"
+          >
+            <option value="all">All Dates</option>
+            <option value="today">Today</option>
+            <option value="week">This Week</option>
+            <option value="upcoming">Upcoming</option>
+          </select>
+        </div>
+
+        <div className="filter-group">
+          <label htmlFor="sort-select">Sort by:</label>
+          <select
+            id="sort-select"
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            className="filter-select"
+          >
+            <option value="date">Date (Earliest First)</option>
+            <option value="popularity">Popularity</option>
+            <option value="newest">Newest First</option>
+          </select>
         </div>
       </div>
 
-      {/* Events Grid */}
-      <div className="events-grid">
-        {displayedEvents.length > 0 ? (
-          displayedEvents.map(event => (
-            <div key={event._id} className="event-card">
-              {/* Event Badges */}
-              <div className="event-badges">
-                <span className="category-badge">
-                  {getCategoryEmoji(event.category)} {event.category}
+      {/* Results Count */}
+      <div className="results-info">
+        <p>Showing {displayedEvents.length} of {totalEvents} events</p>
+      </div>
+    </div>
+
+    {/* Events Grid */}
+    <div className="events-grid">
+      {displayedEvents.length > 0 ? (
+        displayedEvents.map(event => (
+          <div key={event._id} className="event-card">
+            {/* Event Badges */}
+            <div className="event-badges">
+              <span className="category-badge">
+                {getCategoryEmoji(event.category)} {event.category}
+              </span>
+              {event.currentParticipants >= event.maxParticipants && (
+                <span className="full-badge">FULL</span>
+              )}
+              {formatDate(event.date) === 'Today' && (
+                <span className="today-badge">TODAY</span>
+              )}
+            </div>
+
+            {/* Event Content */}
+            <h3 className="event-title">{event.title}</h3>
+            <p className="event-description">
+              {event.description.length > 100
+                ? `${event.description.substring(0, 100)}...`
+                : event.description}
+            </p>
+
+            {/* Event Details */}
+            <div className="event-details">
+              <div className="detail-item">
+                <span className="detail-icon">📅</span>
+                <span>{formatDate(event.date)} at {event.time}</span>
+              </div>
+              <div className="detail-item">
+                <span className="detail-icon">📍</span>
+                <span>{event.location}</span>
+              </div>
+              <div className="detail-item">
+                <span className="detail-icon">👥</span>
+                <span>
+                  {event.currentParticipants}/{event.maxParticipants} joined
                 </span>
-                {event.currentParticipants >= event.maxParticipants && (
-                  <span className="full-badge">FULL</span>
-                )}
-                {formatDate(event.date) === 'Today' && (
-                  <span className="today-badge">TODAY</span>
-                )}
-              </div>
-
-              {/* Event Content */}
-              <h3 className="event-title">{event.title}</h3>
-              <p className="event-description">
-                {event.description.length > 100
-                  ? `${event.description.substring(0, 100)}...`
-                  : event.description}
-              </p>
-
-              {/* Event Details */}
-              <div className="event-details">
-                <div className="detail-item">
-                  <span className="detail-icon">📅</span>
-                  <span>{formatDate(event.date)} at {event.time}</span>
-                </div>
-                <div className="detail-item">
-                  <span className="detail-icon">📍</span>
-                  <span>{event.location}</span>
-                </div>
-                <div className="detail-item">
-                  <span className="detail-icon">👥</span>
-                  <span>
-                    {event.currentParticipants}/{event.maxParticipants} joined
-                  </span>
-                </div>
-              </div>
-
-              {/* Event Actions */}
-              <div className="event-actions">
-                <button 
-                  className="view-details-btn"
-                  onClick={() => window.location.href = `/events/${event._id}`}
-                >
-                  View Details
-                </button>
-                {event.currentParticipants < event.maxParticipants ? (
-                  <button className="join-btn">Join Event</button>
-                ) : (
-                  <button className="join-btn" disabled>Event Full</button>
-                )}
               </div>
             </div>
-          ))
-        ) : (
-          <div className="no-events">
-            <p>😔 No events found matching your criteria.</p>
-            <p>Try adjusting your filters or search terms.</p>
-          </div>
-        )}
-      </div>
 
-      {/* Pagination */}
-      {totalPages > 1 && (
-        <div className="pagination">
-          <button
-            className="page-btn"
-            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-            disabled={currentPage === 1}
-          >
-            ← Previous
-          </button>
-          
-          <div className="page-numbers">
-            {[...Array(totalPages)].map((_, index) => (
-              <button
-                key={index + 1}
-                className={`page-number ${currentPage === index + 1 ? 'active' : ''}`}
-                onClick={() => setCurrentPage(index + 1)}
+            {/* Event Actions */}
+            <div className="event-actions">
+              <button 
+                className="view-details-btn"
+                onClick={() => window.location.href = `/events/${event._id}`}
               >
-                {index + 1}
+                View Details
               </button>
-            ))}
+              {event.currentParticipants < event.maxParticipants ? (
+                <button className="join-btn">Join Event</button>
+              ) : (
+                <button className="join-btn" disabled>Event Full</button>
+              )}
+            </div>
           </div>
-
-          <button
-            className="page-btn"
-            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-            disabled={currentPage === totalPages}
-          >
-            Next →
-          </button>
+        ))
+      ) : (
+        <div className="no-events">
+          <p>😔 No events found matching your criteria.</p>
+          <p>Try adjusting your filters or search terms.</p>
         </div>
       )}
     </div>
-  );
+
+    {/* Pagination */}
+    {totalPages > 1 && (
+      <div className="pagination">
+        <button
+          className="page-btn"
+          onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+          disabled={currentPage === 1}
+        >
+          ← Previous
+        </button>
+        
+        <div className="page-numbers">
+          {[...Array(totalPages)].map((_, index) => (
+            <button
+              key={index + 1}
+              className={`page-number ${currentPage === index + 1 ? 'active' : ''}`}
+              onClick={() => setCurrentPage(index + 1)}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div>
+
+        <button
+          className="page-btn"
+          onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+          disabled={currentPage === totalPages}
+        >
+          Next →
+        </button>
+      </div>
+    )}
+  </div>
+);
 }
 
 export default EventList;

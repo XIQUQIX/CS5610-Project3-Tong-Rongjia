@@ -1,0 +1,11 @@
+.homepage-container {
+  padding: 2rem;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.homepage-container h1 {
+  color: #333;
+  margin-bottom: 1rem;
+}

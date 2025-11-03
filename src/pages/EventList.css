@@ -423,3 +423,38 @@
     padding: 15px;
   }
 }
+
+/* ... 原有样式不变 */
+
+/* Fixed Home 按钮：整个页面右上角 */
+.fixed-home-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 0.75rem 1.5rem;
+  background: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 50px;  /* 圆润按钮 */
+  font-weight: 500;
+  font-size: 1rem;
+  box-shadow: 0 2px 10px rgba(0, 123, 255, 0.3);  /* 阴影，提升层级 */
+  transition: all 0.2s ease;
+  z-index: 1000;  /* 确保在最上层 */
+}
+
+.fixed-home-btn:hover {
+  background: #0056b3;
+  transform: translateY(-2px);  /* 轻微上移 hover 效果 */
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+}
+
+/* 可选：小屏调整位置 */
+@media (max-width: 768px) {
+  .fixed-home-btn {
+    top: 10px;
+    right: 10px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}
