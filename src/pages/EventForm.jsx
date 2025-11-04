@@ -1,10 +1,23 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';  // router hooks
+import { jwtDecode } from "jwt-decode";
 import './EventForm.css';
 
+
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
+
 function EventForm() {
-  const { id } = useParams();  // 如果 /edit/:id，获取 event ID
+  const { id } = useParams();
+  console.log(id);
   const navigate = useNavigate();  // Jump after success
+  const token = localStorage.getItem("token");
+  let userId = null;
+
+  if (token) {
+    const decoded = jwtDecode(token);
+    userId = decoded.id;   // backend signed { id: user._id }
+  }
+
 
   // Form state (based on your mock data structure)
   const [formData, setFormData] = useState({
@@ -49,12 +62,12 @@ function EventForm() {
     try {
       setLoading(true);
       setError(null);
-      const response = await fetch(`http://localhost:4000/api/events/${id}`);
-      
+      const response = await fetch(`${baseUrl}/api/events/${id}`);
+
       if (!response.ok) {
         throw new Error('Failed to fetch event');
       }
-      
+
       const event = await response.json();
       setFormData({
         title: event.title || '',
@@ -89,7 +102,7 @@ function EventForm() {
   const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
     if (!formData.title.trim()) {
-      setError('Title is required');
+      setError("Title is required");
       return;
     }
 
@@ -97,34 +110,44 @@ function EventForm() {
     setError(null);
 
     try {
-      const url = id 
-        ? `http://localhost:4000/api/events/${id}`  // 编辑
-        : 'http://localhost:4000/api/events';  // 新建
-      const method = id ? 'PUT' : 'POST';
+      const token = localStorage.getItem("token");
+      let userId = null;
+
+      if (token) {
+        const decoded = jwtDecode(token);
+        userId = decoded.id;    // ✅ Pull userId from token
+      }
+
+      const url = id
+        ? `${baseUrl}/api/events/${id}`
+        : `${baseUrl}/api/events`;
+      const method = id ? "PUT" : "POST";
 
       const response = await fetch(url, {
         method,
-        headers: { 'Content-Type': 'application/json' },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
-          date: new Date(formData.date).toISOString(),  // make sure full ISO format
-          currentParticipants: parseInt(formData.currentParticipants)  // Make sure the numbers
+          creatorId: userId,                          // ✅ REQUIRED
+          date: new Date(formData.date).toISOString(),
+          currentParticipants: parseInt(formData.currentParticipants)
         })
       });
 
       if (!response.ok) {
-        throw new Error(`Failed to ${isEdit ? 'update' : 'create'} event`);
+        throw new Error(`Failed to ${isEdit ? "update" : "create"} event`);
       }
 
-      alert(isEdit ? 'Event updated successfully!' : 'Event created successfully!');
-      navigate('/events');  // 回列表
+      alert(isEdit ? "Event updated successfully!" : "Event created successfully!");
+      navigate("/events");
     } catch (err) {
-      console.error('Error saving event:', err);
+      console.error("Error saving event:", err);
       setError(err.message);
     } finally {
       setLoading(false);
     }
   }, [formData, id, isEdit, navigate]);
+
 
   // 删除（只编辑模式）
   const handleDelete = useCallback(async () => {
@@ -132,7 +155,7 @@ function EventForm() {
 
     try {
       setLoading(true);
-      const response = await fetch(`http://localhost:4000/api/events/${id}`, { method: 'DELETE' });
+      const response = await fetch(`${baseUrl}/api/events/${id}`, { method: 'DELETE' });
 
       if (!response.ok) {
         throw new Error('Failed to delete event');
@@ -155,7 +178,7 @@ function EventForm() {
   return (
     <div className="event-form-container">
       <h1>{isEdit ? 'Edit Event' : 'Create New Event'}</h1>
-      
+
       {error && <div className="error-message">{error}</div>}
 
       <form onSubmit={handleSubmit} className="event-form">
@@ -240,7 +263,7 @@ function EventForm() {
               max="100"
             />
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="currentParticipants">Current Participants</label>
             <input
@@ -251,10 +274,10 @@ function EventForm() {
               onChange={handleChange}
               min="0"
               max={formData.maxParticipants}  // 动态 max = maxParticipants
-              //disabled={!isEdit}  // 编辑时可改，新建默认 0 不可改（或可选）
+            //disabled={!isEdit}  // 编辑时可改，新建默认 0 不可改（或可选）
             />
           </div>
-        
+
         </div>
 
         <div className="form-actions">

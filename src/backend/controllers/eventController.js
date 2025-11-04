@@ -4,15 +4,17 @@ import { ObjectId } from "mongodb";
 
 dotenv.config();
 
+/**
+ * ✅ GET all events (optional filters like ?category=sports)
+ */
 export async function getEvents(req, res) {
   try {
     const db = await connectDB();
     const events = db.collection("events");
-    
-    // 简单过滤示例（可选，根据 req.query）
+
     let query = {};
     if (req.query.category) query.category = req.query.category;
-    
+
     const allEvents = await events.find(query).toArray();
     res.json(allEvents);
   } catch (err) {
@@ -21,34 +23,69 @@ export async function getEvents(req, res) {
   }
 }
 
+/**
+ * ✅ CREATE event
+ * Required in req.body:
+ * - title, category, location, date, time, maxParticipants
+ * - creatorId (IMPORTANT)
+ */
 export async function createEvent(req, res) {
   try {
+    const {
+      title,
+      description,
+      category,
+      location,
+      date,
+      time,
+      maxParticipants,
+      creatorId,
+    } = req.body;
+
+    if (!creatorId) {
+      return res.status(400).json({ error: "creatorId is required" });
+    }
+
     const db = await connectDB();
     const events = db.collection("events");
-    
+
     const newEvent = {
-      ...req.body,  // 从前端 POST body 拿 title, category 等
-      createdAt: new Date().toISOString()
+      title,
+      description,
+      category,
+      location,
+      date,
+      time,
+      maxParticipants: Number(maxParticipants) || 10,
+      currentParticipants: 1,
+      creator: creatorId,
+      participants: [creatorId], // auto join creator
+      createdAt: new Date().toISOString(),
     };
-    
+
     const result = await events.insertOne(newEvent);
-    res.status(201).json({ _id: result.insertedId, ...newEvent });
+
+    res.status(201).json({ ...newEvent, _id: result.insertedId });
   } catch (err) {
-    console.error("Error creating event:", err);
+    console.error("createEvent ERROR:", err);
     res.status(500).json({ error: "Failed to create event" });
   }
 }
 
+/**
+ * ✅ GET single event by ID
+ */
 export async function getEventById(req, res) {
   try {
     const db = await connectDB();
     const events = db.collection("events");
-    
-    const event = await events.findOne({ _id: new ObjectId(req.params.id) });  // 需 import ObjectId from "mongodb"
-    
+
+    const event = await events.findOne({ _id: new ObjectId(req.params.id) });
+
     if (!event) {
       return res.status(404).json({ error: "Event not found" });
     }
+
     res.json(event);
   } catch (err) {
     console.error("Error fetching event:", err);
@@ -56,19 +93,24 @@ export async function getEventById(req, res) {
   }
 }
 
+/**
+ * ✅ UPDATE event
+ * Frontend sends fields that need updating
+ */
 export async function updateEvent(req, res) {
   try {
     const db = await connectDB();
     const events = db.collection("events");
-    
+
     const result = await events.updateOne(
       { _id: new ObjectId(req.params.id) },
-      { $set: req.body }  // 更新 body 中的字段，如 { currentParticipants: 10 }
+      { $set: req.body }
     );
-    
+
     if (result.matchedCount === 0) {
       return res.status(404).json({ error: "Event not found" });
     }
+
     res.json({ message: "Event updated successfully" });
   } catch (err) {
     console.error("Error updating event:", err);
@@ -76,16 +118,20 @@ export async function updateEvent(req, res) {
   }
 }
 
+/**
+ * ✅ DELETE event
+ */
 export async function deleteEvent(req, res) {
   try {
     const db = await connectDB();
     const events = db.collection("events");
-    
+
     const result = await events.deleteOne({ _id: new ObjectId(req.params.id) });
-    
+
     if (result.deletedCount === 0) {
       return res.status(404).json({ error: "Event not found" });
     }
+
     res.json({ message: "Event deleted successfully" });
   } catch (err) {
     console.error("Error deleting event:", err);
