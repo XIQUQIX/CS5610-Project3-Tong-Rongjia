@@ -1,0 +1,39 @@
+.event-detail-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.back-btn {
+  background: #eee;
+  border: none;
+  padding: 8px 12px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.back-btn:hover {
+  background: #ddd;
+}
+
+.event-detail-header {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.event-detail-header h1 {
+  margin-top: 0;
+}
+
+.event-detail-header p {
+  margin: 8px 0;
+}
+
+.event-map {
+  border-radius: 8px;
+  overflow: hidden;
+}
