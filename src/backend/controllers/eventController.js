@@ -94,23 +94,25 @@ export async function getEventById(req, res) {
 }
 
 /**
- * ✅ POST /api/events/:id/join
+ * ✅ // POST /api/events/:id/join
  */
-
 export const joinEvent = async (req, res) => {
   try {
     const db = await connectDB();
     const events = db.collection("events");
 
-    const { eventId, userId } = req.body;
+    const eventId = req.params.id;
+    const { userId } = req.body;
 
-    if (!eventId || !userId) {
-      return res.status(400).json({ error: "eventId and userId required" });
+    if (!userId) {
+      return res.status(400).json({ error: "userId is required" });
     }
 
     const event = await events.findOne({ _id: new ObjectId(eventId) });
 
-    if (!event) return res.status(404).json({ error: "Event not found" });
+    if (!event) {
+      return res.status(404).json({ error: "Event not found" });
+    }
 
     // Prevent joining your own event
     if (event.creatorId === userId) {
@@ -135,13 +137,14 @@ export const joinEvent = async (req, res) => {
       }
     );
 
-    res.json({ message: "Joined successfully" });
+    res.status(200).json({ message: "Joined successfully" });
 
   } catch (err) {
     console.error("Join Event Error:", err);
     res.status(500).json({ error: "Server error" });
   }
 };
+
 
 
 /**
@@ -168,6 +171,53 @@ export async function updateEvent(req, res) {
     res.status(500).json({ error: "Failed to update event" });
   }
 }
+
+/**
+ * ✅ Leave event
+ */
+
+export const leaveEvent = async (req, res) => {
+  try {
+    const db = await connectDB();
+    const events = db.collection("events");
+
+    const eventId = req.params.id;
+    const { userId } = req.body;
+
+    if (!userId) {
+      return res.status(400).json({ error: "userId required" });
+    }
+
+    // Validate MongoDB ObjectId
+    if (!ObjectId.isValid(eventId)) {
+      return res.status(400).json({ error: "Invalid Event ID" });
+    }
+
+    const event = await events.findOne({ _id: new ObjectId(eventId) });
+    if (!event) {
+      return res.status(404).json({ error: "Event not found" });
+    }
+
+    // Cannot leave if not joined
+    if (!event.participants || !event.participants.includes(userId)) {
+      return res.status(400).json({ error: "You are not in this event" });
+    }
+
+    await events.updateOne(
+      { _id: new ObjectId(eventId) },
+      {
+        $pull: { participants: userId },
+        $inc: { currentParticipants: -1 }
+      }
+    );
+
+    res.json({ message: "Left event successfully" });
+
+  } catch (err) {
+    console.error("Leave Event Error:", err);
+    res.status(500).json({ error: "Server error" });
+  }
+};
 
 /**
  * ✅ DELETE event

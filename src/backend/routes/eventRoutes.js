@@ -1,5 +1,5 @@
 import express from "express";
-import { getEvents, createEvent, joinEvent, getEventById, updateEvent, deleteEvent } from "../controllers/eventController.js";
+import { getEvents, createEvent, joinEvent, leaveEvent, getEventById, updateEvent, deleteEvent } from "../controllers/eventController.js";
 
 const router = express.Router();
 
@@ -11,6 +11,9 @@ router.post("/", createEvent);
 
 // POST /api/:id/join
 router.post("/:id/join", joinEvent);
+
+// POST /api/events/:id/leave
+router.post("/:id/leave", leaveEvent);
 
 // GET /api/events/:id 
 router.get("/:id", getEventById);
