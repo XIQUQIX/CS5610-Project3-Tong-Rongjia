@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import './EventList.css';
+import { useNavigate } from 'react-router-dom';
+
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 function EventList() {
@@ -8,6 +10,7 @@ function EventList() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   // Filter and sort states
   const [searchKeyword, setSearchKeyword] = useState('');
@@ -392,7 +395,7 @@ function EventList() {
               <div className="event-actions">
                 <button
                   className="view-details-btn"
-                  onClick={() => window.location.href = `/events/${event.id}`}
+                  onClick={() => navigate(`/events/${event._id}`)}
                 >
                   View Details
                 </button>
