@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import EventList from './pages/EventList';
 import EventForm from './pages/EventForm';
 import Homepage from './pages/Homepage';
+import EventDetail from './pages/EventDetail';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/events" element={<EventList />} />
+        <Route path="/events/:id" element={<EventDetail />} />
         <Route path="/events/new" element={<EventForm />} />
         <Route path="/events/:id/edit" element={<EventForm />} />
         <Route path="/homepage" element={<Homepage />} />
