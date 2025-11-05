@@ -94,6 +94,57 @@ export async function getEventById(req, res) {
 }
 
 /**
+ * ✅ POST /api/events/:id/join
+ */
+
+export const joinEvent = async (req, res) => {
+  try {
+    const db = await connectDB();
+    const events = db.collection("events");
+
+    const { eventId, userId } = req.body;
+
+    if (!eventId || !userId) {
+      return res.status(400).json({ error: "eventId and userId required" });
+    }
+
+    const event = await events.findOne({ _id: new ObjectId(eventId) });
+
+    if (!event) return res.status(404).json({ error: "Event not found" });
+
+    // Prevent joining your own event
+    if (event.creatorId === userId) {
+      return res.status(400).json({ error: "You cannot join your own event" });
+    }
+
+    // Prevent joining twice
+    if (event.participants && event.participants.includes(userId)) {
+      return res.status(400).json({ error: "Already joined" });
+    }
+
+    // Prevent joining full events
+    if (event.currentParticipants >= event.maxParticipants) {
+      return res.status(400).json({ error: "Event is full" });
+    }
+
+    await events.updateOne(
+      { _id: new ObjectId(eventId) },
+      {
+        $push: { participants: userId },
+        $inc: { currentParticipants: 1 }
+      }
+    );
+
+    res.json({ message: "Joined successfully" });
+
+  } catch (err) {
+    console.error("Join Event Error:", err);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+
+/**
  * ✅ UPDATE event
  * Frontend sends fields that need updating
  */

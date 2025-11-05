@@ -8,7 +8,6 @@ const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 function EventForm() {
   const { id } = useParams();
-  console.log(id);
   const navigate = useNavigate();  // Jump after success
   const token = localStorage.getItem("token");
   let userId = null;
@@ -115,7 +114,7 @@ function EventForm() {
 
       if (token) {
         const decoded = jwtDecode(token);
-        userId = decoded.id;    // ✅ Pull userId from token
+        userId = decoded.id;    // Pull userId from token
       }
 
       const url = id
@@ -128,7 +127,7 @@ function EventForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
-          creatorId: userId,                          // ✅ REQUIRED
+          creatorId: userId,                          // REQUIRED
           date: new Date(formData.date).toISOString(),
           currentParticipants: parseInt(formData.currentParticipants)
         })
@@ -149,7 +148,7 @@ function EventForm() {
   }, [formData, id, isEdit, navigate]);
 
 
-  // 删除（只编辑模式）
+  // Delete the event
   const handleDelete = useCallback(async () => {
     if (!id || !window.confirm('Are you sure you want to delete this event?')) return;
 
@@ -273,8 +272,7 @@ function EventForm() {
               value={formData.currentParticipants}
               onChange={handleChange}
               min="0"
-              max={formData.maxParticipants}  // 动态 max = maxParticipants
-            //disabled={!isEdit}  // 编辑时可改，新建默认 0 不可改（或可选）
+              max={formData.maxParticipants}
             />
           </div>
 

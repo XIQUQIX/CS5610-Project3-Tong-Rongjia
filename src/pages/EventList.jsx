@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import './EventList.css';
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 function EventList() {
   // Events data state
@@ -21,7 +22,7 @@ function EventList() {
     try {
       setLoading(true);
       setError(null);
-      const response = await fetch('http://localhost:4000/api/events'); // 后端 URL
+      const response = await fetch(`${baseUrl}/api/events`); 
       
       if (!response.ok) {
         throw new Error('Failed to fetch events');
@@ -32,12 +33,10 @@ function EventList() {
     } catch (err) {
       console.error('Error fetching events:', err);
       setError(err.message);
-      // Fallback to mock data (for dev/testing)
-      setEvents(getMockEvents());
     } finally {
       setLoading(false);
     }
-}, []); // 依赖数组为空：因为 fetchEvents 不依赖其他 state/props（如果以后依赖 filters，就添加它们）
+}, []); 
     
   
   // Fetch events from backend
@@ -45,81 +44,6 @@ function EventList() {
     fetchEvents();
   }, [fetchEvents]);
 
-  // Mock events data
-  const getMockEvents = () => [
-    {
-      _id: '1',
-      title: 'Study Session for CSYE 6200',
-      description: 'Let\'s prepare for the midterm together. Bring your notes and questions!',
-      category: 'study',
-      location: 'Snell Library',
-      date: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(), // Tomorrow
-      time: '7:00 PM',
-      maxParticipants: 8,
-      currentParticipants: 5,
-      createdAt: new Date().toISOString()
-    },
-    {
-      _id: '2',
-      title: 'Pickup Basketball at Marino',
-      description: 'Need 2 more players for a casual game. All skill levels welcome!',
-      category: 'sports',
-      location: 'Marino Recreation Center',
-      date: new Date().toISOString(), // Today
-      time: '5:30 PM',
-      maxParticipants: 10,
-      currentParticipants: 8,
-      createdAt: new Date().toISOString()
-    },
-    {
-      _id: '3',
-      title: 'Costco Run - Need Carpool',
-      description: 'Going to Costco this Saturday. Have space for 3 people. Split gas!',
-      category: 'groceries',
-      location: 'Off Campus',
-      date: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString(),
-      time: '2:00 PM',
-      maxParticipants: 4,
-      currentParticipants: 1,
-      createdAt: new Date().toISOString()
-    },
-    {
-      _id: '4',
-      title: 'Korean Food Tour in Allston',
-      description: 'Trying new Korean restaurants. Anyone interested in joining?',
-      category: 'food',
-      location: 'Off Campus',
-      date: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000).toISOString(),
-      time: '6:00 PM',
-      maxParticipants: 6,
-      currentParticipants: 3,
-      createdAt: new Date().toISOString()
-    },
-    {
-      _id: '5',
-      title: 'Board Game Night',
-      description: 'Catan, Monopoly, Uno - bring your favorite games!',
-      category: 'gaming',
-      location: 'Curry Student Center',
-      date: new Date().toISOString(),
-      time: '8:00 PM',
-      maxParticipants: 12,
-      currentParticipants: 12,
-      createdAt: new Date().toISOString()
-    },
-    {
-      _id: '6',
-      title: 'Chinese Language Exchange',
-      description: 'Practice Chinese conversation. Native speakers and learners welcome!',
-      category: 'language',
-      location: 'International Village',
-      date: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
-      time: '4:00 PM',
-      maxParticipants: 10,
-      currentParticipants: 6,
-      createdAt: new Date().toISOString()
-    }
-  ];
 
   // Categories for filtering
   const categories = [
@@ -289,12 +213,12 @@ function EventList() {
 
 return (
   <div className="event-list-container">
-    {/* Fixed Home 按钮：放到整个页面右上角 */}
+    {/* Fixed Home */}
     <Link to="/homepage" className="fixed-home-btn">
       Home
     </Link>
 
-    {/* Header - 完整闭合 */}
+    {/* Header  */}
     <div className="event-list-header">
       <div className="header-left">
         <h1>Campus Events</h1>

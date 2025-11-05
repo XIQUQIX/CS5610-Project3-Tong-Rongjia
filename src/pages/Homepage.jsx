@@ -5,7 +5,7 @@
 
   const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
-  function Home() {
+  function Homepage() {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [userData, setUserData] = useState({
@@ -35,7 +35,7 @@
         const userId = decoded.id; 
 
         // Fetch current user info
-        const userResponse = await fetch(`http://localhost:4000/api/users/me?userId=${userId}`);
+        const userResponse = await fetch(`${baseUrl}/api/users/me?userId=${userId}`);
 
         if (!userResponse.ok) {
           throw new Error('Not authenticated');
@@ -121,13 +121,10 @@
         }));
         alert('Successfully left the event!');
       }
-
-      // Uncomment when backend is ready:
-      /*
+  
       try {
-        const response = await fetch(`http://localhost:3000/api/events/${eventId}/leave`, {
+        const response = await fetch(`${baseUrl}/api/events/${eventId}/leave`, {
           method: 'POST',
-          credentials: 'include'
         });
         
         if (response.ok) {
@@ -136,7 +133,7 @@
       } catch (error) {
         console.error('Error leaving event:', error);
       }
-      */
+      
     };
 
     const handleDeleteEvent = async (eventId) => {
@@ -400,4 +397,4 @@
     );
   }
 
-  export default Home;
+  export default Homepage;

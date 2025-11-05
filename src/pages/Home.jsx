@@ -5,7 +5,7 @@ export default function Home() {
   const navigate = useNavigate();
 
   return (
-    <div className="home-container">
+    <>
       <h1 className="home-title">Welcome!</h1>
       <p className="home-subtitle">Please choose an option to continue:</p>
 
@@ -18,6 +18,6 @@ export default function Home() {
           Login
         </button>
       </div>
-    </div>
+      </>
   );
 }
