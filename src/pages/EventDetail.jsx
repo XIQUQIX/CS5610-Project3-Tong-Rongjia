@@ -50,45 +50,44 @@ function EventDetail() {
 
   return (
     <div className="event-detail-container">
-      <button className="back-btn" onClick={() => navigate('/events')}>
+    <button className="back-btn" onClick={() => navigate('/events')}>
         ← Back to Events
-      </button>
+    </button>
 
-      <div className="event-detail-header">
+    <div className="event-detail-header">
         <h1>{event.title}</h1>
         <p>{event.description}</p>
         <p>
-          <strong>Date:</strong> {new Date(event.date).toLocaleString()}
+        <strong>Date:</strong> {new Date(event.date).toLocaleString()}
         </p>
         <p>
-          <strong>Time:</strong> {event.time}
+        <strong>Time:</strong> {event.time}
         </p>
         <p>
-          <strong>Location:</strong> {event.location}{' '}
-          <a href={getMapLinkUrl(event.location)} target="_blank" rel="noopener noreferrer">
+        <strong>Location:</strong> {event.location}{' '}
+        <a href={getMapLinkUrl(event.location)} target="_blank" rel="noopener noreferrer">
             View on Google Maps
-          </a>
+        </a>
         </p>
         <p>
-          <strong>Participants:</strong> {event.currentParticipants} / {event.maxParticipants}{' '}
-          {isFull && '(FULL)'}
+        <strong>Participants:</strong> {event.currentParticipants} / {event.maxParticipants}{' '}
+        {isFull && '(FULL)'}
         </p>
-      </div>
+    </div>
 
-      <div className="event-map">
-        {/* Google Maps iframe */}
+    <div className="event-map">
         <iframe
-          title="Event Location"
-          width="100%"
-          height="400"
-          style={{ border: 0 }}
-          loading="lazy"
-          allowFullScreen
-          src={`https://www.google.com/maps/embed/v1/place?key=YOUR_GOOGLE_MAPS_API_KEY&q=${encodeURIComponent(
+        title="Event Location"
+        width="100%"
+        height="400"
+        style={{ border: 0 }}
+        loading="lazy"
+        allowFullScreen
+        src={`https://www.google.com/maps/embed/v1/place?key=YOUR_GOOGLE_MAPS_API_KEY&q=${encodeURIComponent(
             event.location
-          )}&zoom=15`}
+        )}&zoom=15`}
         />
-      </div>
+    </div>
     </div>
   );
 }

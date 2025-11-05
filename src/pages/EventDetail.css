@@ -1,25 +1,41 @@
-.event-detail-container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 20px;
+/* 整体页面灰色背景 */
+body {
+  background-color: #f0f2f5;
   font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
+/* 白色卡片容器 */
+.event-detail-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #ffffff; /* 白色背景 */
+  color: #000000; /* 黑色文字 */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 返回按钮 */
 .back-btn {
-  background: #eee;
-  border: none;
-  padding: 8px 12px;
-  margin-bottom: 20px;
+  padding: 10px 20px;
+  background: white;
+  color: #3498db;
+  border: 2px solid #3498db;
+  border-radius: 6px;
+  font-weight: 600;
   cursor: pointer;
-  border-radius: 5px;
+  transition: all 0.3s;
 }
 
 .back-btn:hover {
-  background: #ddd;
+  background: #3498db;
+  color: white;
 }
 
+/* 事件信息卡片 */
 .event-detail-header {
-  background: #f9f9f9;
   padding: 20px;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -27,13 +43,18 @@
 
 .event-detail-header h1 {
   margin-top: 0;
+  color: #111; /* 确保标题是黑色 */
 }
 
 .event-detail-header p {
   margin: 8px 0;
+  color: #111; /* 确保段落文字是黑色 */
 }
 
+/* Google Map */
 .event-map {
   border-radius: 8px;
   overflow: hidden;
+  margin-top: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
