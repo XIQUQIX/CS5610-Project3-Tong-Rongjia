@@ -6,6 +6,7 @@ const baseUrl = import.meta.env.VITE_API_BASE_URL;
 function EventList() {
   // Events data state
   const [events, setEvents] = useState([]);
+  const [currentUserId, setCurrentUserId] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -18,6 +19,7 @@ function EventList() {
   const [currentPage, setCurrentPage] = useState(1);
   const eventsPerPage = 9;
 
+  // Fetch events from backend
   const fetchEvents = useCallback(async () => {
     try {
       setLoading(true);
@@ -38,12 +40,20 @@ function EventList() {
     }
   }, []);
 
-
-  // Fetch events from backend
+  // Get current user ID from token
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const { id } = JSON.parse(atob(token.split(".")[1]));
+        setCurrentUserId(id);
+      } catch (err) {
+        console.error("Token decode failed", err);
+      }
+    }
+    
     fetchEvents();
   }, [fetchEvents]);
-
 
   // Categories for filtering
   const categories = [
@@ -190,7 +200,7 @@ function EventList() {
     return emojis[category] || '📌';
   };
 
-  // handle the join event button
+  // Handle joining an event
   const handleJoinEvent = async (eventId) => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -198,10 +208,9 @@ function EventList() {
       return;
     }
 
-    // decode token to get userId
-    const { id: userId } = JSON.parse(atob(token.split(".")[1]));
-
     try {
+      const { id: userId } = JSON.parse(atob(token.split(".")[1]));
+
       const response = await fetch(`${baseUrl}/api/events/${eventId}/join`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -211,18 +220,85 @@ function EventList() {
       const data = await response.json();
 
       if (!response.ok) {
-        alert(data.error);
+        alert(data.error || "Failed to join event");
       } else {
-        alert("Joined event!");
+        alert("✅ Joined event successfully!");
         fetchEvents(); // refresh UI
       }
-
     } catch (err) {
       console.error("Join error:", err);
       alert("Failed to join event");
     }
   };
 
+  // Handle leaving an event
+  const handleLeaveEvent = async (eventId) => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("Please log in first");
+      return;
+    }
+
+    if (!window.confirm("Are you sure you want to leave this event?")) {
+      return;
+    }
+
+    try {
+      const { id: userId } = JSON.parse(atob(token.split(".")[1]));
+
+      const response = await fetch(`${baseUrl}/api/events/${eventId}/leave`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert(data.error || "Failed to leave event");
+      } else {
+        alert("✅ You left the event successfully!");
+        fetchEvents(); // refresh UI
+      }
+    } catch (err) {
+      console.error("Leave error:", err);
+      alert("Failed to leave event");
+    }
+  };
+
+  // Handle deleting an event
+  const handleDeleteEvent = async (eventId) => {
+    if (!window.confirm('Are you sure you want to delete this event?')) {
+      return;
+    }
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("Please log in first");
+      return;
+    }
+
+    try {
+      const response = await fetch(`${baseUrl}/api/events/${eventId}`, {
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json"
+        }
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        alert(data.error || "Failed to delete event");
+      } else {
+        alert("✅ Event deleted successfully!");
+        fetchEvents(); // refresh UI
+      }
+    } catch (err) {
+      console.error("Delete error:", err);
+      alert("Failed to delete event");
+    }
+  };
 
   // Loading state
   if (loading) {
@@ -239,7 +315,6 @@ function EventList() {
     return (
       <div className="event-list-error">
         <p>❌ Error: {error}</p>
-        <p>Using mock data for demonstration</p>
         <button onClick={fetchEvents}>Retry</button>
       </div>
     );
@@ -247,12 +322,12 @@ function EventList() {
 
   return (
     <div className="event-list-container">
-      {/* Fixed Home */}
+      {/* Fixed Home Button */}
       <Link to="/homepage" className="fixed-home-btn">
         Home
       </Link>
 
-      {/* Header  */}
+      {/* Header */}
       <div className="event-list-header">
         <div className="header-left">
           <h1>Campus Events</h1>
@@ -348,7 +423,7 @@ function EventList() {
       <div className="events-grid">
         {displayedEvents.length > 0 ? (
           displayedEvents.map(event => (
-            <div key={event.id} className="event-card">
+            <div key={event._id} className="event-card">
               {/* Event Badges */}
               <div className="event-badges">
                 <span className="category-badge">
@@ -392,20 +467,55 @@ function EventList() {
               <div className="event-actions">
                 <button
                   className="view-details-btn"
-                  onClick={() => window.location.href = `/events/${event.id}`}
+                  onClick={() => window.location.href = `/events/${event._id}`}
                 >
                   View Details
                 </button>
-                {event.currentParticipants < event.maxParticipants ? (
+
+                {/* If current user created the event → DELETE */}
+                {currentUserId && event.creator === currentUserId && (
                   <button
-                    className="join-btn"
-                    onClick={() => handleJoinEvent(event._id)}
+                    className="delete-btn"
+                    onClick={() => handleDeleteEvent(event._id)}
                   >
-                    Join Event
+                    Delete Event
                   </button>
-                ) : (
-                  <button className="join-btn" disabled>Event Full</button>
                 )}
+
+                {/* If user already joined → LEAVE */}
+                {currentUserId &&
+                  event.participants?.includes(currentUserId) &&
+                  event.creator !== currentUserId && (
+                    <button
+                      className="leave-btn"
+                      onClick={() => handleLeaveEvent(event._id)}
+                    >
+                      Leave Event
+                    </button>
+                  )}
+
+                {/* If user has NOT joined and event has space → JOIN */}
+                {currentUserId &&
+                  !event.participants?.includes(currentUserId) &&
+                  event.creator !== currentUserId &&
+                  event.currentParticipants < event.maxParticipants && (
+                    <button
+                      className="join-btn"
+                      onClick={() => handleJoinEvent(event._id)}
+                    >
+                      Join Event
+                    </button>
+                  )}
+
+                {/* If user NOT joined & FULL → disabled */}
+                {currentUserId &&
+                  !event.participants?.includes(currentUserId) &&
+                  event.creator !== currentUserId &&
+                  event.currentParticipants >= event.maxParticipants && (
+                    <button className="join-btn" disabled>
+                      Event Full
+                    </button>
+                  )}
               </div>
             </div>
           ))
