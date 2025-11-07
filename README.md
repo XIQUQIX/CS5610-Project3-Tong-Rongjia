@@ -1,4 +1,4 @@
-# CS5610-Project3-Tong-Rongjia
+<img width="1910" height="981" alt="image" src="https://github.com/user-attachments/assets/052cf27e-df83-44cc-8c49-64b3e40e0c31" /># CS5610-Project3-Tong-Rongjia
 # Huskyhub
 
 ## Author
@@ -11,7 +11,7 @@ Rongjia Sun
 Email: sun.rongj@northeastern.edu
 
 ## public server
-https://huskyhub.netlify.app/
+http://3.148.233.230:5173/
 
 ## Class Link
 [CS5610WebDev Online]
