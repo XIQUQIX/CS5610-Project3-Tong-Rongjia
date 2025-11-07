@@ -98,10 +98,23 @@ Build a web application designed for Northeastern University students to create 
 
 
 ## Screenshot
-### Sign Up
+### Welcome Page
+<img width="1910" height="981" alt="image" src="https://github.com/user-attachments/assets/0bbca639-5d0d-43d0-b714-e09dbb1c1eeb" />
 
+### Signup
+<img width="1910" height="981" alt="image" src="https://github.com/user-attachments/assets/c023c477-20d6-4185-ac82-7fe61fd68f5d" />
 
-### login
+### Events List
+<img width="1910" height="981" alt="image" src="https://github.com/user-attachments/assets/19fb156a-8ab9-43b2-bbd1-916f48b17cf5" />
+
+### Personal Homepage
+<img width="1910" height="981" alt="image" src="https://github.com/user-attachments/assets/4bf7beb1-fbd0-4752-9154-902581919580" />
+
+### CRUD events
+<img width="1910" height="981" alt="image" src="https://github.com/user-attachments/assets/a894b106-22b2-4060-b49c-e735acfe027d" />
+
+### Event Details
+<img width="1910" height="981" alt="image" src="https://github.com/user-attachments/assets/cff019ac-114b-46de-95f7-731fea93e46f" />
 
 
 ## Technology Requirements
