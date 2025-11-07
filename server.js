@@ -8,7 +8,11 @@ import userRoutes from "./src/backend/routes/userRoutes.js"
 dotenv.config();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+}));
 app.use(express.json());
 
 // // 手动配置 CORS
@@ -18,11 +22,11 @@ app.use(express.json());
 //   res.header('Access-Control-Allow-Credentials', 'true');
 //   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 //   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  
+
 //   if (req.method === 'OPTIONS') {
 //     return res.sendStatus(200);
 //   }
-  
+
 //   next();
 // });
 
@@ -30,6 +34,6 @@ app.use("/auth", authRoutes);
 app.use("/api/events", eventRoutes);
 app.use("/api/users", userRoutes);
 
-app.listen(process.env.PORT, () => {
-  console.log(`✅ Backend running on http://localhost:${process.env.PORT}`);
+app.listen(process.env.PORT, "0.0.0.0", () => {
+  console.log(`✅ Backend running on http://0.0.0.0:${process.env.PORT}`);
 });
