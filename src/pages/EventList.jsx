@@ -54,7 +54,7 @@ function EventList() {
         console.error("Token decode failed", err);
       }
     }
-    
+
     fetchEvents();
   }, [fetchEvents]);
 
@@ -542,15 +542,30 @@ function EventList() {
           </button>
 
           <div className="page-numbers">
-            {[...Array(totalPages)].map((_, index) => (
-              <button
-                key={index + 1}
-                className={`page-number ${currentPage === index + 1 ? 'active' : ''}`}
-                onClick={() => setCurrentPage(index + 1)}
-              >
-                {index + 1}
+            {/* Always show Page 1 */}
+            <button
+              className={`page-number ${currentPage === 1 ? 'active' : ''}`}
+              onClick={() => setCurrentPage(1)}
+            >
+              1
+            </button>
+
+            {/* Show current page if not page 1 */}
+            {currentPage !== 1 && (
+              <button className="page-number active">
+                {currentPage}
               </button>
-            ))}
+            )}
+
+            {/* Show next page if it exists */}
+            {currentPage < totalPages && (
+              <button
+                className="page-number"
+                onClick={() => setCurrentPage(currentPage + 1)}
+              >
+                {currentPage + 1}
+              </button>
+            )}
           </div>
 
           <button
@@ -562,6 +577,7 @@ function EventList() {
           </button>
         </div>
       )}
+
     </div>
   );
 }
