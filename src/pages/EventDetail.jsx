@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './EventDetail.css';
 
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
+
 function EventDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -15,7 +17,7 @@ function EventDetail() {
   const fetchEventDetail = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`http://localhost:4000/api/events/${id}`);
+      const response = await fetch(`${baseUrl}/api/events/${id}`);
       if (!response.ok) throw new Error('Event not found');
       const data = await response.json();
       setEvent(data);
