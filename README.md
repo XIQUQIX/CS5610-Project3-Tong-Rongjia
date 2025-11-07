@@ -11,7 +11,7 @@ Rongjia Sun
 Email: sun.rongj@northeastern.edu
 
 ## public server
-### TODO
+https://huskyhub.netlify.app/
 
 ## Class Link
 [CS5610WebDev Online]
@@ -69,6 +69,13 @@ Build a web application designed for Northeastern University students to create 
   
   - Visual loading indicators
 
+### Google Maps Integration
+
+  - Display an **interactive mini Google Map** inside each Event Detail page
+  - Shows the **event’s exact location** on the map  
+  - Click the map or the **“View on Google Maps”** link to open Google Maps in a new tab  
+  - Users can check **their distance and route** to the event venue directly via Google Maps
+
 ### Data Population
 
   - Script to generate 1000+ realistic campus events
@@ -91,10 +98,23 @@ Build a web application designed for Northeastern University students to create 
 
 
 ## Screenshot
-### Sign Up
+### Welcome Page
+<img width="1910" height="981" alt="image" src="https://github.com/user-attachments/assets/0bbca639-5d0d-43d0-b714-e09dbb1c1eeb" />
 
+### Signup
+<img width="1910" height="981" alt="image" src="https://github.com/user-attachments/assets/c023c477-20d6-4185-ac82-7fe61fd68f5d" />
 
-### login
+### Events List
+<img width="1910" height="981" alt="image" src="https://github.com/user-attachments/assets/19fb156a-8ab9-43b2-bbd1-916f48b17cf5" />
+
+### Personal Homepage
+<img width="1910" height="981" alt="image" src="https://github.com/user-attachments/assets/4bf7beb1-fbd0-4752-9154-902581919580" />
+
+### CRUD events
+<img width="1910" height="981" alt="image" src="https://github.com/user-attachments/assets/a894b106-22b2-4060-b49c-e735acfe027d" />
+
+### Event Details
+<img width="1910" height="981" alt="image" src="https://github.com/user-attachments/assets/cff019ac-114b-46de-95f7-731fea93e46f" />
 
 
 ## Technology Requirements
@@ -166,9 +186,22 @@ MongoDB Atlas (Cloud Database)
 - Optional: Git for cloning the repository
 
 ### Setup
-### TODO
+#### Prerequisites
 
+- Node.js (v18+ recommended)
+- MongoDB (local or Atlas cloud instance)
+- Git
 
+1. Clone the Repository
+```
+git clone https://github.com/XIQUQIX/CS5610-Project3-Tong-Rongjia.git
+cd CS5610-Project3-Tong-Rongjia
+```
+2. Install Dependencies
+This is a monorepo with frontend (Vite/React) and backend (Node/Express/MongoDB) in the root. Install all dependencies:
+```
+npm install
+```
 
 ### AI Usage
 ### 1. **ChatGPT**
