@@ -6,7 +6,7 @@ export default function Home() {
 
   return (
     <>
-      <h1 className="home-title">Welcome!</h1>
+      <h1 className="home-title">Welcome Husky!</h1>
       <p className="home-subtitle">Please choose an option to continue:</p>
 
       <div className="button-group">
