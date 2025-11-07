@@ -186,9 +186,22 @@ MongoDB Atlas (Cloud Database)
 - Optional: Git for cloning the repository
 
 ### Setup
-### TODO
+#### Prerequisites
 
+- Node.js (v18+ recommended)
+- MongoDB (local or Atlas cloud instance)
+- Git
 
+1. Clone the Repository
+```
+bashgit clone https://github.com/XIQUQIX/CS5610-Project3-Tong-Rongjia.git
+cd CS5610-Project3-Tong-Rongjia
+```
+2. Install Dependencies
+This is a monorepo with frontend (Vite/React) and backend (Node/Express/MongoDB) in the root. Install all dependencies:
+```
+npm install
+```
 
 ### AI Usage
 ### 1. **ChatGPT**
