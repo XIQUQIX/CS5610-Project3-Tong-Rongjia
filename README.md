@@ -69,6 +69,13 @@ Build a web application designed for Northeastern University students to create 
   
   - Visual loading indicators
 
+### Google Maps Integration
+
+  - Display an **interactive mini Google Map** inside each Event Detail page
+  - Shows the **event’s exact location** on the map  
+  - Click the map or the **“View on Google Maps”** link to open Google Maps in a new tab  
+  - Users can check **their distance and route** to the event venue directly via Google Maps
+
 ### Data Population
 
   - Script to generate 1000+ realistic campus events
