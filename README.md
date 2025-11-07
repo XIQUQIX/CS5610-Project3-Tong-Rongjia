@@ -194,7 +194,7 @@ MongoDB Atlas (Cloud Database)
 
 1. Clone the Repository
 ```
-bashgit clone https://github.com/XIQUQIX/CS5610-Project3-Tong-Rongjia.git
+git clone https://github.com/XIQUQIX/CS5610-Project3-Tong-Rongjia.git
 cd CS5610-Project3-Tong-Rongjia
 ```
 2. Install Dependencies
