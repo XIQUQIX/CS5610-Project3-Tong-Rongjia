@@ -66,7 +66,7 @@ The Project is executed really well . Good job . Very creative idea
 ### MIT license
 - **Status:** Present. Great job 
 
-### PropTypes for React components (5)
+### PropTypes for React components
 - **Suggestions:** Add `prop-types` and define PropTypes for components that accept props . Proptype is missing 
 
 **Overall Good work!**
