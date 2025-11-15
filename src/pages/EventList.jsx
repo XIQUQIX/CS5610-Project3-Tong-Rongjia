@@ -1,3 +1,6 @@
+```
+This component is missing proptypes definition.
+```
 import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import './EventList.css';
