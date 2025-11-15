@@ -1,3 +1,10 @@
+```
+This component is missing PropTypes definitions, and there's also a small issue with the Google Maps integration. 
+The iframe uses the literal string 'YOUR_GOOGLE_MAPS_API_KEY' as a placeholder, which means the map feature doesn't actually work for users.
+The direct link to Google Maps works fine though.
+
+```
+
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './EventDetail.css';
