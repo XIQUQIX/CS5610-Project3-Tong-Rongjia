@@ -1,3 +1,11 @@
+```
+This component is missing PropTypes definitions, and there's also an important gap in data validation. 
+While the frontend uses HTML5 validation attributes like min/max on the date input, there's no corresponding validation in the backend controller. 
+This means users could bypass the frontend checks through browser developer tools or API calls directly, 
+allowing them to create events with past dates, empty titles, negative participant counts, or other invalid data. 
+Adding server-side checks would prevent database corruption and ensure data integrity regardless of how requests are submitted.
+```
+
 import { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';  // router hooks
 import { jwtDecode } from "jwt-decode";
