@@ -1,3 +1,8 @@
+```
+The EventCard component is missing PropTypes definitions, which is a requirement since the rubric explicitly states "Defines PropTypes for every React Collection." 
+PropTypes provide runtime type-checking that catches bugs during development when incorrect data types are passed to components - 
+for example, if someone accidentally passes a string instead of an object for the event prop, PropTypes would immediately warn you in the console rather than causing a cryptic runtime error later. 
+```
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from "jwt-decode";

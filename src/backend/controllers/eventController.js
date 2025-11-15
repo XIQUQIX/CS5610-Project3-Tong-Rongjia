@@ -1,3 +1,12 @@
+```
+The createEvent and updateEvent functions don't perform any input validation before inserting data into the database. 
+This creates both security vulnerabilities and data integrity issues since the backend trusts all data coming from the frontend. 
+Without validation, users could create events with empty titles, negative participant counts, past dates, or even inject malicious scripts into description fields.
+While the frontend has some HTML5 validation, this can be easily bypassed through browser developer tools or direct API calls. 
+Server-side validation is essential because the backend should never trust client input.
+```
+
+
 import dotenv from "dotenv";
 import { connectDB } from "../config/db.js";
 import { ObjectId } from "mongodb";

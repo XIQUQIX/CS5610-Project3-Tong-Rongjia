@@ -1,3 +1,9 @@
+```
+This component is missing PropTypes definitions and has the same accessibility considerations as the Login page. 
+The form inputs would benefit from aria-label attributes for screen reader support, proper input type attributes (type="email" for email fields),
+and autocomplete attributes that help browsers and password managers work correctly.
+```
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Signup.css";
