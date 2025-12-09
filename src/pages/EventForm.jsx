@@ -2,7 +2,6 @@ import { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';  // router hooks
 import { jwtDecode } from "jwt-decode";
 import './EventForm.css';
-import PropTypes from 'prop-types';
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
@@ -295,8 +294,5 @@ function EventForm() {
     </div>
   );
 }
-
-EventForm.propTypes = {
-};
 
 export default EventForm;

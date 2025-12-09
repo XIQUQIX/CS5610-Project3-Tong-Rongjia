@@ -1,13 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Signup.css";
-import PropTypes from 'prop-types';
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
-
-Signup.propTypes = {
-  // No props are currently used in this component
-};
 
 export default function Signup() {
   const navigate = useNavigate();

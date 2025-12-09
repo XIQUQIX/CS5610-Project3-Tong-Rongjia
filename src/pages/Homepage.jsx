@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from "jwt-decode";
 import './Homepage.css';
-import PropTypes from 'prop-types';
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
@@ -408,8 +407,5 @@ function EventCard({ event, formatDate, getCategoryEmoji, isCreator = false, isP
     </div>
   );
 }
-
-Homepage.propTypes = {
-};
 
 export default Homepage;

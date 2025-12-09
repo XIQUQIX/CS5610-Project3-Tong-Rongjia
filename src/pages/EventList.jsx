@@ -2,7 +2,6 @@ import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import './EventList.css';
 import { useNavigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
@@ -582,11 +581,5 @@ function EventList() {
     </div>
   );
 }
-
-EventList.propTypes = {
-};
-
-EventList.defaultProps = {
-};
 
 export default EventList;

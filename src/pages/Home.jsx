@@ -1,12 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
-import PropTypes from 'prop-types';
-
-Home.propTypes = {
-};
-
-Home.defaultProps = {
-};
 
 export default function Home() {
   const navigate = useNavigate();
