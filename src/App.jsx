@@ -6,12 +6,14 @@ import EventList from './pages/EventList';
 import EventForm from './pages/EventForm';
 import Homepage from './pages/Homepage';
 import EventDetail from './pages/EventDetail';
+import Navbar from './components/Navbar';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
 
   return (
     <BrowserRouter>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />

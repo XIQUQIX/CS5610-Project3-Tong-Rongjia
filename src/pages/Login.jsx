@@ -13,19 +13,40 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    const res = await fetch(`${baseUrl}/auth/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
+    if (!baseUrl) {
+      setMessage("Error: API base URL not configured. Please check your .env file.");
+      return;
+    }
 
-    const data = await res.json();
-    setMessage(data.message || data.error);
+    if (!email || !password) {
+      setMessage("Please enter both email and password");
+      return;
+    }
 
-    if (!data.error) {
-      // ✅ Store real token later
-      localStorage.setItem("token", data.token);
-      navigate("/events");
+    try {
+      const res = await fetch(`${baseUrl}/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+      
+      if (!res.ok) {
+        setMessage(data.error || data.message || "Login failed");
+        return;
+      }
+
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+        setMessage("Login successful! Redirecting...");
+        navigate("/events");
+      } else {
+        setMessage("Login failed: No token received");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      setMessage(`Network error: ${error.message}. Make sure the backend server is running.`);
     }
   };
 
