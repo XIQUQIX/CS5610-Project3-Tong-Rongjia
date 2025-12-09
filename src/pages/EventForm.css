@@ -6,9 +6,10 @@
 }
 
 .event-form-container h1 {
+  font-family: 'Anton', sans-serif;
   text-align: center;
-  color: #333;
-  margin-bottom: 2rem;
+  color: #2c3e50;
+  margin-bottom: 3.5rem;
 }
 
 .error-message {

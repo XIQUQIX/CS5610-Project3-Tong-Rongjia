@@ -72,17 +72,20 @@
 
 /* Header */
 .event-list-header {
+  
   text-align: center;
   margin-bottom: 30px;
 }
 
 .event-list-header h1 {
-  font-size: 2.5rem;
+  font-family: 'Anton', sans-serif;
+  font-size: 3.5rem;
   color: #2c3e50;
   margin-bottom: 10px;
 }
 
 .event-list-header p {
+  font-family: 'Montserrat', sans-serif;
   font-size: 1.1rem;
   color: #7f8c8d;
 }

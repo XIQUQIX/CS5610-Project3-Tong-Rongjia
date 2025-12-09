@@ -33,8 +33,9 @@ body::before {
 }
 
 .home-title {
-  font-size: 3rem;
-  font-weight: 700;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 8.5rem;
+  font-weight: 400;
   margin-bottom: 0.5rem;
   text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.5);
 }
